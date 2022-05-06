@@ -7,10 +7,10 @@ namespace TradeCategory.Tests
     public class TradeTest
     {
         [Fact]
-        public void ReturnTradePublicSector() 
+        public void ReturnTradePublicSector()
         {
             var trade = new Trade(1000, "Public", DateTime.Now);
-            Assert.True("Public" == trade.ClientSector);        
+            Assert.True("Public" == trade.ClientSector);
         }
 
         [Fact]
@@ -19,7 +19,6 @@ namespace TradeCategory.Tests
             var trade = new Trade(1000, "Private", DateTime.Now);
             Assert.True("Private" == trade.ClientSector);
         }
-
 
         [Fact]
         public void ReturnTradeValue()
@@ -33,13 +32,6 @@ namespace TradeCategory.Tests
         {
             var trade = new Trade(1000, "Private", DateTime.Now);
             Assert.True(trade.NextPaymentDate > DateTime.MinValue);
-        }
-
-        [Fact]
-        public void ReturnTradeNumberTransaction()
-        {
-            var trade = new Trade(1000, "Private", DateTime.Now);
-            Assert.NotNull(trade.TrasactionNumber);
         }
     }
 }
