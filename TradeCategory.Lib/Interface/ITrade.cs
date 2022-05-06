@@ -5,7 +5,7 @@
         double Value { get;  }
         string ClientSector { get; }
         DateTime NextPaymentDate { get; }
-        Guid? TrasactionNumber { get; }
+
         //bool IsPoliticallyExposed { get; }
     }
 }

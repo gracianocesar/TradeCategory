@@ -3,7 +3,7 @@ using TradeCategory.Lib;
 using TradeCategory.Lib.Model;
 
 DateTime referenceDate = DateTime.MinValue;
-double  value = 0;
+double value = 0;
 string clientSector = string.Empty;
 DateTime nextPaymentDate = DateTime.MinValue;
 string trade;
@@ -21,7 +21,7 @@ amount = Convert.ToInt32(Console.ReadLine());
 for (int i = 0; i < amount; i++)
 {
     count = i + 1;
-    Console.WriteLine("Input a trade {0}. Ex: 2000000 Private 12/29/2025",count);
+    Console.WriteLine("Input a trade {0}. Ex: 2000000 Private 12/29/2025", count);
     trade = Console.ReadLine();
     fomatedTrades = trade.Split(' ');
 
@@ -30,11 +30,13 @@ for (int i = 0; i < amount; i++)
         value = Convert.ToDouble(fomatedTrades[0]);
         clientSector = Convert.ToString(fomatedTrades[1]);
         nextPaymentDate = Convert.ToDateTime(fomatedTrades[2]);
+        listTrade.Add(new Trade(value, clientSector, nextPaymentDate) { ReferenceDate = referenceDate });
     }
-    listTrade.Add(PortifolioTrade.PerformPortifolioTrade(value,clientSector,nextPaymentDate,referenceDate));
-}
 
-foreach (var itemTrade in listTrade)
-{
-    Console.WriteLine(itemTrade.Status);
 }
+var result = PortifolioTrade.PerformPortifolioTrade(listTrade);
+foreach (var status in result)
+{
+    Console.WriteLine(status);
+}
+Console.ReadKey();

@@ -1,10 +1,14 @@
-﻿namespace TradeCategory.Lib.Model
+﻿using TradeCategory.Lib.Interface;
+
+namespace TradeCategory.Lib.Model
 {
-    public class HighRisk : Trade
+    public class HighRisk : ICategory
     {
-        public HighRisk(double value, string clientSector, DateTime nextPaymentData) 
-            : base(value, clientSector, nextPaymentData)
+        public string Name { get => "HIGHRISK"; }
+
+        public bool AppliesTo(Trade trade)
         {
+            return (trade.Value > 1000000 && trade.ClientSector.Equals("Private"));
         }
     }
 }

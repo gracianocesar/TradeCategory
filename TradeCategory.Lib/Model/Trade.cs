@@ -10,7 +10,6 @@ namespace TradeCategory.Lib.Model
 
         public int Amount { get; set; }
         public DateTime ReferenceDate { get; set; }
-        private Guid _transactionNumber { get; set; }
         //private bool _isPoliticallyExposed {get;set;}
 
         public string ErrorMessage { get; set; }
@@ -21,7 +20,6 @@ namespace TradeCategory.Lib.Model
             _value = value;
             _clientSector = clientSector;
             _nextPaymentDate = nextPaymentData;
-            _transactionNumber = GenerateTransactionNumber();
         }
 
         public double Value { get => _value; }
@@ -30,15 +28,7 @@ namespace TradeCategory.Lib.Model
 
         public DateTime NextPaymentDate { get => _nextPaymentDate; }
 
-        public Guid? TrasactionNumber { get => _transactionNumber; }
-
-
         //public bool IsPoliticallyExposed { get => _isPoliticallyExposed; }
 
-        private Guid GenerateTransactionNumber()
-        {
-            _transactionNumber = Guid.NewGuid();
-            return _transactionNumber;
-        }
     }
 }

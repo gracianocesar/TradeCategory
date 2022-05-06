@@ -1,28 +1,33 @@
-﻿using TradeCategory.Lib.Model;
+﻿using TradeCategory.Lib.Interface;
+using TradeCategory.Lib.Model;
 
 namespace TradeCategory.Lib
 {
     public static class PortifolioTrade
     {
-        const double valueBase = 1000000;
-        public static Trade PerformPortifolioTrade(double value, string clientSector, DateTime nextPaymentData, DateTime referenceDate)
+        public static List<string> PerformPortifolioTrade(List<Trade> trades)
         {
-            var date = referenceDate.AddDays(30);
-            if (nextPaymentData > date)
-            {
-                return TradeExpired.PerformTradeExpired(value, clientSector, nextPaymentData);
-            }
-            else if (value > valueBase && clientSector.Equals("Private"))
-            {
-                return TradeHighRisk.PerformTradeHigRisk(value, clientSector, nextPaymentData);
-            }
-            else if (value > valueBase && clientSector.Equals("Public"))
-            {
-                return TradeMediumRisk.PerformTradeMediumRisk(value, clientSector, nextPaymentData);
-            }
+            var listCategory = new List<ICategory>();
 
-            var tradeNotIplemented = new Trade(0, "", DateTime.MinValue) { ErrorMessage = "Not implemented Trade" };
-            return tradeNotIplemented;
+            listCategory.Add(new Expired());
+            listCategory.Add(new HighRisk());
+            listCategory.Add(new MediumRisk());
+            listCategory.Add(new NotCategorized());
+
+            var listCategoryReturn = new List<string>();
+
+            foreach (var trade in trades)
+            {
+                foreach (var category in listCategory)
+                {
+                    if (category.AppliesTo(trade))
+                    {
+                        listCategoryReturn.Add(category.Name);
+                        break;
+                    }
+                }
+            }
+            return listCategoryReturn;
         }
     }
 }

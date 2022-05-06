@@ -1,11 +1,14 @@
-﻿namespace TradeCategory.Lib.Model
+﻿using TradeCategory.Lib.Interface;
+
+namespace TradeCategory.Lib.Model
 {
-    public class Expired : Trade
+    public class Expired : ICategory
     {
-        public Expired(double value, string clientSector, DateTime nextPaymentData) 
-            : base(value, clientSector, nextPaymentData)
+        public string Name { get => "EXPIRED"; }
+
+        public bool AppliesTo(Trade trade)
         {
-           
-        }       
+            return (trade.ReferenceDate.AddDays(30) > trade.NextPaymentDate);
+        }
     }
 }
