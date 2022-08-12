@@ -26,6 +26,7 @@ namespace TradeCategory.Lib
                         break;
                     }
                 }
+                
             }
             return listCategoryReturn;
         }
