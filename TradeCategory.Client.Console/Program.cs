@@ -32,7 +32,6 @@ for (int i = 0; i < amount; i++)
         nextPaymentDate = Convert.ToDateTime(fomatedTrades[2]);
         listTrade.Add(new Trade(value, clientSector, nextPaymentDate) { ReferenceDate = referenceDate });
     }
-
 }
 var result = PortifolioTrade.PerformPortifolioTrade(listTrade);
 foreach (var status in result)
